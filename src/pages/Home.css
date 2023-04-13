@@ -1,0 +1,13 @@
+.container {
+  text-align: center;
+}
+
+.wrapper {
+  display: flex;
+}
+
+.loader {
+  width: 10px;
+  height: 10px;
+  background-color: red;
+}
