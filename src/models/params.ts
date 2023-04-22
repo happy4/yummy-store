@@ -1,9 +1,11 @@
+import Query from './query';
+
 interface Params {
-  offset: number,
-  limit: number,
+  offset: string,
+  limit: string,
   sorting: string,
   direction: string,
-  query: string,
+  query: Query,
   searchField: string,
 };
 

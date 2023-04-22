@@ -20,6 +20,10 @@ export const querySlice = createSlice({
       // console.log('payload', payload);
       // state = {...state, ...payload};
       state.searchStr = payload.searchStr;
+      state.colors = payload.colors;
+    },
+    setColors: (state, { payload }) => {
+      state.colors = payload.colors;
     },
     resetQuery: (state) => {
       state = initialState;

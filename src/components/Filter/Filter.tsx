@@ -1,24 +1,14 @@
 import ColorFilter from '../ColorFilter';
 import SortBySelect from '../SortBySelect/SortBySelect';
 import PriceInput from '../PriceInput/PriceInput';
+import { useCallback } from 'react';
 
-const Filter = () => {
-  const colors = ['white', 'green', 'black', 'red', 'orange'];
-
-  const handlerColorFilter = (colors: string[]) => {
-
-      // setParams((prevParams) => ({
-      //   ...prevParams,
-      //   offset: 0,
-      //   query: colors[0],
-      //   searchField: 'color'
-      // }));
-  };
-
+const Filter: React.FC<{ onUpdate: (colors: string[]) => void }> = ({ onUpdate }) => {
+  const colors = ['red', 'black', 'white', 'green', 'yellow', 'blue', 'pink'];
   return (
     <div className="filter" >
       <SortBySelect />
-      <ColorFilter colors={colors} onColorFilter={handlerColorFilter} />
+      <ColorFilter colors={colors} onUpdate={onUpdate} />
       <PriceInput />
     </div >
   );

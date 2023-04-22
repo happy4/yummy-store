@@ -11,22 +11,26 @@ import Filter from '../components/Filter/Filter';
 import CardItems from '../components/Products/Products';
 
 import { fetchProducts } from '../features/profucts/actions';
+import { actions } from '../features/query/reducer';
 
 import './Home.css';
 
 function Home() {
   const { items: products, isFetching, more } = useAppSelector((state: RootState) => state.products);
-  const { searchStr } = useAppSelector((state: RootState) => state.query);
+  const { searchStr, colors } = useAppSelector((state: RootState) => state.query);
   const dispatch = useAppDispatch();
 
   console.log('products', products.length, searchStr, more);
 
   const [params, setParams] = useState({
-    limit: 10,
-    offset: 0,
+    limit: '10',
+    offset: '0',
     sorting: 'rate',
     direction: 'desc',
-    query: searchStr,
+    query: {
+      searchStr,
+      colors
+    },
     searchField: 'name'
   });
 
@@ -58,19 +62,27 @@ function Home() {
   }, [handleObserver]);
 
   useEffect(() => {
-    setParams({ ...params, query: searchStr, offset: 0 });
-  }, [searchStr]);
+    setParams({ ...params, query: { searchStr, colors }, offset: '0' });
+  }, [searchStr, colors]);
 
   useEffect(() => {
     dispatch(fetchProducts(params));
   }, [params]);
 
+  const onColorsUpdate = (colors: string[]) => {
+    dispatch(actions.setQuery({colors, searchStr}));
+  }
+
+  const onSearchUpdate = (searchStr: string) => {
+    dispatch(actions.setQuery({ searchStr, colors }));
+  }
+
   return (
     <Container>
-      <SearchInput />
+      <SearchInput onUpdate={onSearchUpdate} />
       <div className="container">
         <div className="wrapper">
-          <Filter />
+          <Filter onUpdate={onColorsUpdate}  />
           <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             <CardItems items={products} />
           </Grid>
