@@ -4,20 +4,25 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 
+import { actions } from '../../features/query/reducer';
+
+import { useAppDispatch } from '../../hooks';
+
 const SortBy = () => {
   const [sortBy, setSortBy] = useState('popular');
 
+  const dispatch = useAppDispatch();
+
   const onSortHandler = useCallback((event: SelectChangeEvent<String>) => {
     const sort = event.target.value as string;
-    // if (sort === 'low_to_high') {
-    //   params.sorting = 'price';
-    //   params.direction = 'asc';
-    // } else if (sort === 'high_to_low') {
-    //   params.sorting = 'price';
-    //   params.direction = 'desc';
-    // }
+    if (sort === 'low_to_high') {
+      dispatch(actions.setQuery({ sorting: 'price', direction: 'asc' }));
+    } else if (sort === 'high_to_low') {
+      dispatch(actions.setQuery({ sorting: 'price', direction: 'desc' }));
+    } else {
+      dispatch(actions.setQuery({ sorting: 'rate', direction: 'desc' }));
+    }
     setSortBy(sort);
-    // dispatch(fetchProducts(params));
   }, []);
 
   return (

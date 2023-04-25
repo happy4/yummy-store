@@ -40,6 +40,8 @@ export default function paginator(request: RestRequest, items: []) {
 
 console.log('searchStr', searchStr);
 console.log('colors', colors);
+console.log('sortBy', sortBy);
+console.log('sortOrder', sortOrder);
 
   let rows: Card[] = items;
   const hasMore: boolean = offset < items.length;

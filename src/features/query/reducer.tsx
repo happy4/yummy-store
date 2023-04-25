@@ -18,7 +18,8 @@ export const querySlice = createSlice({
     setQuery: (state, { payload }) => {
       // console.log('state', state);
       // console.log('payload', payload);
-      // state = {...state, ...payload};
+      state.sorting = payload.sorting;
+      state.direction = payload.direction;
       state.searchStr = payload.searchStr;
       state.colors = payload.colors;
     },

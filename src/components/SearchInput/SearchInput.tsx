@@ -1,6 +1,3 @@
-import { useAppDispatch } from '../../hooks';
-import { actions } from '../../features/query/reducer';
-
 import SearchIcon from '@mui/icons-material/Search';
 import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -8,7 +5,6 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import IconButton from '@mui/material/IconButton';
 
 const SearchInput: React.FC<{onUpdate: (searchStr: string) => void }> = ({ onUpdate }) => {
-  const dispatch = useAppDispatch();
   const handleInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const searchValue = (e.target as HTMLInputElement).value;
     onUpdate(searchValue);

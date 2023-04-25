@@ -9,8 +9,6 @@ export function fetchProducts(params: Params) {
       const {
         limit = '25',
         offset = '0',
-        sorting = 'rate',
-        direction = 'desc',
         query = {},
         searchField = ''
       } = params;
@@ -18,15 +16,14 @@ export function fetchProducts(params: Params) {
     let url = new URLSearchParams({
       limit,
       offset,
-      sorting,
-      direction,
       searchField,
       searchStr: query.searchStr || '',
-      colors: (query.colors || []).join(',')
+      colors: (query.colors || []).join(','),
+      sorting: query.sorting || 'price',
+      direction: query.direction || 'asc'
     });
 
     console.log('url', url.toString());
-
 
       const data = await fetch(`/products?${url.toString()}`)
         .then(res => res.json())

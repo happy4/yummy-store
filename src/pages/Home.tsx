@@ -17,22 +17,29 @@ import './Home.css';
 
 function Home() {
   const { items: products, isFetching, more } = useAppSelector((state: RootState) => state.products);
-  const { searchStr, colors } = useAppSelector((state: RootState) => state.query);
+  const { searchStr, colors, sorting, direction } = useAppSelector((state: RootState) => state.query);
   const dispatch = useAppDispatch();
-
-  console.log('products', products.length, searchStr, more);
 
   const [params, setParams] = useState({
     limit: '10',
     offset: '0',
-    sorting: 'rate',
-    direction: 'desc',
     query: {
       searchStr,
-      colors
+      colors,
+      sorting,
+      direction,
     },
     searchField: 'name'
   });
+
+  useEffect(() => {
+    setParams({ ...params, query: { searchStr, colors, sorting, direction }, offset: '0' });
+  }, [searchStr, colors, sorting, direction]);
+
+  useEffect(() => {
+    console.log('params', params);
+    dispatch(fetchProducts(params));
+  }, [params]);
 
   const loader = useRef(null);
 
@@ -47,7 +54,7 @@ function Home() {
   }, [isFetching]);
 
   useEffect(() => {
-    const {current: currentLoader} = loader;
+    const { current: currentLoader } = loader;
     if (!currentLoader) return;
     const option = {
       root: null,
@@ -61,16 +68,8 @@ function Home() {
     }
   }, [handleObserver]);
 
-  useEffect(() => {
-    setParams({ ...params, query: { searchStr, colors }, offset: '0' });
-  }, [searchStr, colors]);
-
-  useEffect(() => {
-    dispatch(fetchProducts(params));
-  }, [params]);
-
   const onColorsUpdate = (colors: string[]) => {
-    dispatch(actions.setQuery({colors, searchStr}));
+    dispatch(actions.setQuery({ colors, searchStr }));
   }
 
   const onSearchUpdate = (searchStr: string) => {
@@ -81,13 +80,13 @@ function Home() {
     <Container>
       <SearchInput onUpdate={onSearchUpdate} />
       <div className="container">
+        {isFetching && <p>🌀 Loading...</p>}
         <div className="wrapper">
-          <Filter onUpdate={onColorsUpdate}  />
+          <Filter onUpdate={onColorsUpdate} />
           <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             <CardItems items={products} />
           </Grid>
         </div>
-        {isFetching && <p>🌀 Loading...</p>}
       </div>
       {!isFetching && <div className="loader" ref={loader} />}
     </Container>

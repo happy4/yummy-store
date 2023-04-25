@@ -37,7 +37,6 @@ export const productsSlice = createSlice({
       state.items = payload.offset === 0 ? payload.products : [...state.items, ...payload.products];
       state.more = payload.more;
       state.total = payload.total;
-      debugger;
     },
     fetchProductsFailure: (state) => {
       state.loaded = true;
