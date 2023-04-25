@@ -4,9 +4,9 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 
-import { actions } from '../../features/query/reducer';
+import { actions } from 'src/features/query/slice';
 
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch } from 'src/hooks';
 
 const SortBy = () => {
   const [sortBy, setSortBy] = useState('popular');

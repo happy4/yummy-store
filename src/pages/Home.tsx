@@ -3,15 +3,15 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 
-import type { RootState } from '../store';
-import { useAppSelector, useAppDispatch } from '../hooks';
+import type { RootState } from 'src/store';
+import { useAppSelector, useAppDispatch } from 'src/hooks';
 
-import SearchInput from '../components/SearchInput/SearchInput';
-import Filter from '../components/Filter/Filter';
-import CardItems from '../components/Products/Products';
+import SearchInput from 'src/components/SearchInput/SearchInput';
+import Filter from 'src/components/Filter/Filter';
+import CardItems from 'src/components/Products/Products';
 
-import { fetchProducts } from '../features/profucts/actions';
-import { actions } from '../features/query/reducer';
+import { fetchProducts } from 'src/features/profucts/actions';
+import { actions } from 'src/features/query/slice';
 
 import './Home.css';
 

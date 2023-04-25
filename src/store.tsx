@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 
-import productsReducer from './features/profucts/reducer';
-import queryReducer from './features/query/reducer';
+import productsSlice from './features/profucts/slice';
+import querySlice from './features/query/slice';
 
 export const store = configureStore({
   reducer: {
-    products: productsReducer,
-    query: queryReducer
+    products: productsSlice,
+    query: querySlice
   },
 });
 

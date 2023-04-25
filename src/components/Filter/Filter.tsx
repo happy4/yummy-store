@@ -1,6 +1,6 @@
-import ColorFilter from '../ColorFilter';
-import SortBySelect from '../SortBySelect/SortBySelect';
-import PriceInput from '../PriceInput/PriceInput';
+import ColorFilter from 'src/components/ColorFilter';
+import SortBySelect from 'src/components/SortBySelect/SortBySelect';
+import PriceInput from 'src/components/PriceInput/PriceInput';
 
 const Filter: React.FC<{ onUpdate: (colors: string[]) => void }> = ({ onUpdate }) => {
   const colors = ['red', 'black', 'white', 'green', 'yellow', 'blue', 'pink'];

@@ -1,5 +1,5 @@
 import { RestRequest } from 'msw'
-import Card from '../models/card';
+import Card from 'src/models/card';
 
 const sortCb = (a: any, b: any, desc: boolean, prop: string) => {
   if (a[prop] < b[prop]) return desc ? 1 : -1;

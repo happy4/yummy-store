@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import Card from '../../models/card';
+import Card from 'src/models/card';
 
 export interface ProductsState {
   items: Card[],

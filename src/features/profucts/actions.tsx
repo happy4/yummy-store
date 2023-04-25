@@ -1,6 +1,6 @@
-import { actions } from './reducer';
-import { AppDispatch } from '../../store';
-import Params from '../../models/params';
+import { actions } from './slice';
+import { AppDispatch } from 'src/store';
+import Params from 'src/models/params';
 
 export function fetchProducts(params: Params) {
   return async (dispatch: AppDispatch) => {

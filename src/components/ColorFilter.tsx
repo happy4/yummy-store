@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { v4 as uuid } from 'uuid';
 
-import { useAppDispatch } from '../hooks';
-import { actions } from '../features/query/reducer';
+import { useAppDispatch } from 'src/hooks';
+import { actions } from 'src/features/query/slice';
 
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import Query from '../../models/query';
+import Query from 'src/models/query';
 
 const initialState: Query = {
   colors: [],

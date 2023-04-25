@@ -2,8 +2,8 @@ import React from 'react';
 
 import Grid from '@mui/material/Grid';
 
-import CardItem from '../CardItem';
-import Card from '../../models/card';
+import CardItem from 'src/components/CardItem';
+import Card from 'src/models/card';
 
 const Products: React.FC<{ items: Card[] }> = ({ items }) => {
   return (
