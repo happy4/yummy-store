@@ -23,6 +23,10 @@ const filterByColors = (rows: Card[], colors: string[]) => {
   return rows.filter((item) => colors.indexOf(item.color) > -1);
 };
 
+const filterByPrice = (rows: Card[], minPrice: number, maxPrice: number) => {
+  return rows.filter((item) => item.price >= minPrice && item.price <= maxPrice);
+};
+
 /**
  * Returns rows paginated by request parameters.
  * Callback must be passed to generate mocked data.
@@ -37,6 +41,8 @@ export default function paginator(request: RestRequest, items: []) {
   const searchStr = searchParams.get('searchStr');
   const colors = (searchParams.get('colors') || '').split(',');
   const searchField = searchParams.get('searchField');
+  const minPrice = searchParams.get('minPrice');
+  const maxPrice = searchParams.get('maxPrice');
 
 console.log('searchStr', searchStr);
 console.log('colors', colors);
@@ -58,6 +64,10 @@ console.log('sortOrder', sortOrder);
   }
   if (colors.length > 0 && colors[0] !== '') {
     rows = filterByColors(rows, colors);
+  }
+
+  if (minPrice && maxPrice) {
+    rows = filterByPrice(rows, +minPrice, +maxPrice);
   }
 
   if (sortBy && sortOrder) {

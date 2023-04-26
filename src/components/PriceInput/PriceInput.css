@@ -1,0 +1,15 @@
+.price-wrapper {
+  width: 220px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.slider-wrapeer {
+  width: 150px;
+}
+
+.price-container {
+  display: block;
+  margin-top: 10px;
+  text-align: left;
+}

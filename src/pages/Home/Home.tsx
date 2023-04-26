@@ -18,7 +18,7 @@ import './Home.css';
 
 function Home() {
   const { items: products, isFetching, more } = useAppSelector((state: RootState) => state.products);
-  const { searchStr, colors, sorting, direction } = useAppSelector((state: RootState) => state.query);
+  const { searchStr, colors, sorting, direction, minPrice, maxPrice } = useAppSelector((state: RootState) => state.query);
   const dispatch = useAppDispatch();
 
   const handleObserver = useCallback((entries: IntersectionObserverEntry[]) => {
@@ -42,16 +42,17 @@ function Home() {
       colors,
       sorting,
       direction,
+      minPrice,
+      maxPrice
     },
     searchField: 'name'
   });
 
   useEffect(() => {
-    setParams({ ...params, query: { searchStr, colors, sorting, direction }, offset: '0' });
-  }, [searchStr, colors, sorting, direction]);
+    setParams({ ...params, query: { searchStr, colors, sorting, direction, minPrice, maxPrice }, offset: '0' });
+  }, [searchStr, colors, sorting, direction, minPrice, maxPrice]);
 
-  useEffect(() => { dispatch(fetchProducts(params)) }, [params]);
-
+  useEffect(() => { console.log('params', params); dispatch(fetchProducts(params)) }, [params]);
 
   const onColorsUpdate = (colors: string[]) => {
     dispatch(actions.setQuery({ colors, searchStr }));

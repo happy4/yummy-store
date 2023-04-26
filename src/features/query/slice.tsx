@@ -16,12 +16,9 @@ export const querySlice = createSlice({
   initialState,
   reducers: {
     setQuery: (state, { payload }) => {
-      // console.log('state', state);
-      // console.log('payload', payload);
-      state.sorting = payload.sorting;
-      state.direction = payload.direction;
-      state.searchStr = payload.searchStr;
-      state.colors = payload.colors;
+      for (const [key] of Object.entries(payload)) {
+        state[key as keyof Query] = payload[key];
+      }
     },
     setColors: (state, { payload }) => {
       state.colors = payload.colors;
