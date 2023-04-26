@@ -1,6 +1,6 @@
 import { rest } from 'msw'
-import generateProduct from '../components/Products/mock';
-import paginate from '../utils/paginator';
+import generateProduct from 'src/components/Products/mock';
+import paginate from 'src/utils/paginator';
 
 const productsArr = [];
 for(let i=0; i<20; i++) {
