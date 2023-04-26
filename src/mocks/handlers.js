@@ -6,7 +6,6 @@ const productsArr = [];
 for(let i=0; i<20; i++) {
   productsArr.push(generateProduct(i));
 }
-console.log('productsArr', productsArr);
 
 export const handlers = [
   rest.get('/products', (req, res, ctx) => {
