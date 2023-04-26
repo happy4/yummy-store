@@ -6,7 +6,7 @@ import MenuItem from '@mui/material/MenuItem';
 
 import { actions } from 'src/features/query/slice';
 
-import { useAppDispatch } from 'src/hooks';
+import { useAppDispatch } from 'src/hooks/hooks';
 
 const SortBy = () => {
   const [sortBy, setSortBy] = useState('popular');

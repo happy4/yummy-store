@@ -4,7 +4,8 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 
 import type { RootState } from 'src/store';
-import { useAppSelector, useAppDispatch } from 'src/hooks';
+import { useAppSelector, useAppDispatch } from 'src/hooks/hooks';
+import useIntersectionObserver from 'src/hooks/intersectionObserver';
 
 import SearchInput from 'src/components/SearchInput/SearchInput';
 import Filter from 'src/components/Filter/Filter';
@@ -19,6 +20,19 @@ function Home() {
   const { items: products, isFetching, more } = useAppSelector((state: RootState) => state.products);
   const { searchStr, colors, sorting, direction } = useAppSelector((state: RootState) => state.query);
   const dispatch = useAppDispatch();
+
+  const handleObserver = useCallback((entries: IntersectionObserverEntry[]) => {
+    const target = entries[0];
+    if (target.isIntersecting && more) {
+      setParams((prevParams) => ({
+        ...prevParams,
+        offset: prevParams.offset + 10
+      }));
+    }
+  }, []);
+  const loaderRef = useRef(null);
+  useIntersectionObserver(loaderRef, handleObserver);
+
 
   const [params, setParams] = useState({
     limit: '10',
@@ -36,37 +50,8 @@ function Home() {
     setParams({ ...params, query: { searchStr, colors, sorting, direction }, offset: '0' });
   }, [searchStr, colors, sorting, direction]);
 
-  useEffect(() => {
-    console.log('params', params);
-    dispatch(fetchProducts(params));
-  }, [params]);
+  useEffect(() => { dispatch(fetchProducts(params)) }, [params]);
 
-  const loader = useRef(null);
-
-  const handleObserver = useCallback((entries: IntersectionObserverEntry[]) => {
-    const target = entries[0];
-    if (target.isIntersecting && more) {
-      setParams((prevParams) => ({
-        ...prevParams,
-        offset: prevParams.offset + 10
-      }));
-    }
-  }, [isFetching]);
-
-  useEffect(() => {
-    const { current: currentLoader } = loader;
-    if (!currentLoader) return;
-    const option = {
-      root: null,
-      rootMargin: "20px",
-      threshold: 0.5
-    };
-    const observer = new IntersectionObserver(handleObserver, option);
-    observer.observe(currentLoader);
-    return () => {
-      observer.unobserve(currentLoader);
-    }
-  }, [handleObserver]);
 
   const onColorsUpdate = (colors: string[]) => {
     dispatch(actions.setQuery({ colors, searchStr }));
@@ -88,7 +73,7 @@ function Home() {
           </Grid>
         </div>
       </div>
-      {!isFetching && <div className="loader" ref={loader} />}
+      {!isFetching && <div className="loader" ref={loaderRef} />}
     </Container>
   );
 }

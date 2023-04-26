@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { v4 as uuid } from 'uuid';
 
-import { useAppDispatch } from 'src/hooks';
+import { useAppDispatch } from 'src/hooks/hooks';
 import { actions } from 'src/features/query/slice';
 
 import FormGroup from '@mui/material/FormGroup';
