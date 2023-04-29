@@ -1,11 +1,12 @@
 import { useState } from 'react';
+
 import Slider from '@mui/material/Slider';
 import Button from '@mui/material/Button';
 
 import { useAppDispatch } from 'src/hooks/hooks';
 import { actions } from 'src/features/query/slice';
 
-import './PriceInput.css';
+import CSS from './PriceInput.module.css';
 
 const PriceInput = () => {
   const dispatch = useAppDispatch();
@@ -21,10 +22,10 @@ const PriceInput = () => {
   }
 
   return (
-    <div className="price-container">
+    <div className={CSS['price-container']}>
       <label>Price</label>
-      <div className="price-wrapper">
-        <div className="slider-wrapeer">
+      <div className={CSS['price-wrapper']}>
+        <div className={CSS['slider-wrapeer']}>
           <Slider
             getAriaLabel={() => 'Price range'}
             value={range}

@@ -14,7 +14,7 @@ import CardItems from 'src/components/Products/Products';
 import { fetchProducts } from 'src/features/profucts/actions';
 import { actions } from 'src/features/query/slice';
 
-import './Home.css';
+import CSS from './Home.module.css';
 
 function Home() {
   const { items: products, isFetching, more } = useAppSelector((state: RootState) => state.products);
@@ -65,16 +65,16 @@ function Home() {
   return (
     <Container>
       <SearchInput onUpdate={onSearchUpdate} />
-      <div className="container">
+      <div className={CSS.container}>
         {isFetching && <p>🌀 Loading...</p>}
-        <div className="wrapper">
+        <div className={CSS.wrapper}>
           <Filter onUpdate={onColorsUpdate} />
           <Grid container spacing={{ xs: 2, md: 2 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             <CardItems items={products} />
           </Grid>
         </div>
       </div>
-      {!isFetching && <div className="loader" ref={loaderRef} />}
+      {!isFetching && <div className={CSS.loader} ref={loaderRef} />}
     </Container>
   );
 }
