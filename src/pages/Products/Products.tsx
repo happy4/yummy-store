@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 
-import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 
 import type { RootState } from 'src/store';
@@ -63,7 +62,7 @@ function Products() {
   }
 
   return (
-    <Container>
+    <>
       <SearchInput onUpdate={onSearchUpdate} />
       <div className={CSS.container}>
         {isFetching && <p>🌀 Loading...</p>}
@@ -75,7 +74,7 @@ function Products() {
         </div>
       </div>
       {!isFetching && <div className={CSS.loader} ref={loaderRef} />}
-    </Container>
+    </>
   );
 }
 

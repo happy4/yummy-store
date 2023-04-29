@@ -6,6 +6,8 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import MenuIcon from '@mui/icons-material/Menu';
 
+import CSS from './Navigation.module.css';
+
 function Navigation() {
   const [isOpened, setIsOpened] = useState(false);
   const [buttonElement, setButtonElement] = React.useState<HTMLButtonElement | null>(
@@ -34,7 +36,7 @@ function Navigation() {
   }
 
   return (
-    <div>
+    <div className={CSS.container}>
       <Menu
         open={isOpened}
         anchorEl={buttonElement}
