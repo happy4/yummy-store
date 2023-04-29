@@ -14,9 +14,9 @@ import CardItems from 'src/components/Products/Products';
 import { fetchProducts } from 'src/features/profucts/actions';
 import { actions } from 'src/features/query/slice';
 
-import CSS from './Home.module.css';
+import CSS from './Products.module.css';
 
-function Home() {
+function Products() {
   const { items: products, isFetching, more } = useAppSelector((state: RootState) => state.products);
   const { searchStr, colors, sorting, direction, minPrice, maxPrice } = useAppSelector((state: RootState) => state.query);
   const dispatch = useAppDispatch();
@@ -79,4 +79,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Products;
