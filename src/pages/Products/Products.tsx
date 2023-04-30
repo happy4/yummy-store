@@ -17,7 +17,14 @@ import CSS from './Products.module.css';
 
 function Products() {
   const { items: products, isFetching, more } = useAppSelector((state: RootState) => state.products);
-  const { searchStr, colors, sorting, direction, minPrice, maxPrice } = useAppSelector((state: RootState) => state.query);
+  const {
+    searchStr,
+    colors,
+    sorting,
+    direction,
+    minPrice,
+    maxPrice
+  } = useAppSelector((state: RootState) => state.query);
   const dispatch = useAppDispatch();
 
   const handleObserver = useCallback((entries: IntersectionObserverEntry[]) => {
@@ -48,10 +55,21 @@ function Products() {
   });
 
   useEffect(() => {
-    setParams({ ...params, query: { searchStr, colors, sorting, direction, minPrice, maxPrice }, offset: '0' });
+    setParams({
+      ...params,
+      query:{
+        searchStr,
+        colors,
+        sorting,
+        direction,
+        minPrice,
+        maxPrice
+      },
+      offset: '0'
+    });
   }, [searchStr, colors, sorting, direction, minPrice, maxPrice]);
 
-  useEffect(() => { console.log('params', params); dispatch(fetchProducts(params)) }, [params]);
+  useEffect(() => { dispatch(fetchProducts(params)) }, [params]);
 
   const onColorsUpdate = (colors: string[]) => {
     dispatch(actions.setQuery({ colors, searchStr }));
