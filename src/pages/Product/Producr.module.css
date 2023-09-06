@@ -1,0 +1,19 @@
+input {
+  display: none;
+}
+
+.check {
+  width: 20px;
+  height: 20px;
+  border: 1px solid black;
+  position: relative;
+}
+
+.check:after {
+  display: none;
+  content: "✔️";
+}
+
+input:checked + .check:after {
+  display: block;
+}
